@@ -3,7 +3,17 @@ pipeline {
     tools {
         maven "Maven"
             }
+environment {
+        // This should match the name of the SonarQube server configured in Jenkins -> Manage Jenkins -> Configure System
+        SONARQUBE_SERVER = 'AppAnalysisServer'
+    }
     stages {
+
+ stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Initialize'){
             steps{
               echo "PATH = ${env.M2_HOME}\\bin;${env.PATH}"
@@ -17,6 +27,13 @@ pipeline {
                 dir("D:\\Workwithscm\\workspace\\AppDemo") 
                 {
                 bat 'mvn -B -DskipTests clean compile package exec:java'
+                }
+            }
+        }
+stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
+                    bat 'mvn sonar:sonar'
                 }
             }
         }
