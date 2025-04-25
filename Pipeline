@@ -38,8 +38,7 @@ dir('D:\\Workwithscm\\workspace\\AppDemo') {
                 withCredentials([string(credentialsId: 'sonar-jenkins-new', variable: 'SONAR_TOKEN')]) {
                 bat "echo Token: %SONAR_TOKEN%"
 
-                    bat "sonar-scanner"
-                }
+                 }
                    
                 }
             }
