@@ -36,6 +36,8 @@ dir('D:\\Workwithscm\\workspace\\AppDemo') {
                 withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
 
                 withCredentials([string(credentialsId: 'sonar-jenkins-new', variable: 'SONAR_TOKEN')]) {
+                bat "echo Token: %SONAR_TOKEN%"
+
                     bat "mvn sonar:sonar -Dsonar.login=%SONAR_TOKEN%"
                 }
                    
