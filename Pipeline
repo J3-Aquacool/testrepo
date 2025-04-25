@@ -10,12 +10,26 @@ pipeline {
               echo "M2_HOME = ${env.M2_HOME ?: '/opt/maven'}"
             }
         }
-        stage('Build') {
-            steps {
-                dir("D:\\Workwithscm\\workspace\\AppDemo") {
+        stage('Build') 
+        {
+            steps 
+            {
+                dir("D:\\Workwithscm\\workspace\\AppDemo") 
+                {
                 bat 'mvn -B -DskipTests clean compile package exec:java'
                 }
             }
         }
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=CheckCodeNew1.2"
+    }
+  }
+}
      }
     }
