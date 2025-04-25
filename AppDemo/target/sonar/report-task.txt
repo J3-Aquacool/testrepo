@@ -1,0 +1,6 @@
+projectKey=com.demo:AppDemo
+serverUrl=http://localhost:9797
+serverVersion=9.9.6.92038
+dashboardUrl=http://localhost:9797/dashboard?id=com.demo%3AAppDemo
+ceTaskId=AZZst6tWK-9dfLH3xE2I
+ceTaskUrl=http://localhost:9797/api/ce/task?id=AZZst6tWK-9dfLH3xE2I
