@@ -26,7 +26,7 @@ environment {
             {
                 dir("D:\\Workwithscm\\workspace\\AppDemo") 
                 {
-                bat 'mvn -B -DskipTests clean compile package exec:java'
+                bat 'mvn clean verify'
                 }
             }
         }
