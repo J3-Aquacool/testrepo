@@ -30,6 +30,14 @@ environment {
                 }
             }
         }
+
+stage('Build and Test with Code Coverage') {
+    steps {
+        dir("D:\\Workwithscm\\workspace\\AppDemo") {
+            bat 'mvn clean verify'
+        }
+    }
+}
 stage('SonarQube Analysis') {
             steps {
 dir('D:\\Workwithscm\\workspace\\AppDemo') {
