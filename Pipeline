@@ -26,10 +26,18 @@ environment {
             {
                 dir("D:\\Workwithscm\\workspace\\AppDemo") 
                 {
-                bat 'mvn -B -DskipTests clean compile package exec:java'
+                bat 'mvn clean verify'
                 }
             }
         }
+
+stage('Build and Test with Code Coverage') {
+    steps {
+        dir("D:\\Workwithscm\\workspace\\AppDemo") {
+            bat 'mvn clean verify'
+        }
+    }
+}
 stage('SonarQube Analysis') {
             steps {
 dir('D:\\Workwithscm\\workspace\\AppDemo') {
@@ -38,6 +46,7 @@ dir('D:\\Workwithscm\\workspace\\AppDemo') {
                 withCredentials([string(credentialsId: 'sonar-jenkins-new', variable: 'SONAR_TOKEN')]) {
                 bat "echo Token: %SONAR_TOKEN%"
   bat 'mvn sonar:sonar -Dsonar.login=%SONAR_TOKEN%'
+bat 'mvn sonar:sonar -Dsonar.login=%SONAR_TOKEN% -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml'
                  }
                    
                 }
