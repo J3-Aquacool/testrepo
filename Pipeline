@@ -38,6 +38,7 @@ dir('D:\\Workwithscm\\workspace\\AppDemo') {
                 withCredentials([string(credentialsId: 'sonar-jenkins-new', variable: 'SONAR_TOKEN')]) {
                 bat "echo Token: %SONAR_TOKEN%"
   bat 'mvn sonar:sonar -Dsonar.login=%SONAR_TOKEN%'
+bat '-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml'
                  }
                    
                 }
